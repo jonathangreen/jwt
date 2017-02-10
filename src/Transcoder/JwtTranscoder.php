@@ -61,10 +61,7 @@ class JwtTranscoder implements JwtTranscoderInterface {
   }
 
   /**
-   * Setter for the JWT secret.
-   *
-   * @param string $secret
-   *   The secret for the JWT.
+   * {@inheritdoc}
    */
   public function setSecret($secret) {
     $this->secret = $secret;
@@ -86,7 +83,7 @@ class JwtTranscoder implements JwtTranscoderInterface {
   /**
    * {@inheritdoc}
    */
-  public function encode(JsonWebTokenInterface $jwt, $options = []) {
+  public function encode(JsonWebTokenInterface $jwt, array $options = []) {
     $options = $this->getOptions($options);
     $encoded = $this->transcoder->encode($jwt->getPayload(), $options['key'], $options['alg']);
     return $encoded;

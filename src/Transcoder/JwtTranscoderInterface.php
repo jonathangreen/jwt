@@ -35,4 +35,12 @@ interface JwtTranscoderInterface {
    */
   public function encode(JsonWebTokenInterface $jwt, array $options = []);
 
+  /**
+   * Setter for the JWT secret.
+   *
+   * @param string $secret
+   *   The secret for the JWT.
+   */
+  public function setSecret($secret);
+
 }
