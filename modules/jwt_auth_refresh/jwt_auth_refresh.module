@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Main module file for jwt_auth_refresh.
+ */
+
+/**
  * Implements hook_cron().
  */
 function jwt_auth_refresh_cron() {

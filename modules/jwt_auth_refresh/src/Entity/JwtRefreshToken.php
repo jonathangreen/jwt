@@ -2,8 +2,6 @@
 
 namespace Drupal\jwt_auth_refresh\Entity;
 
-use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Entity\Annotation\ContentEntityType;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -11,6 +9,8 @@ use Drupal\jwt_auth_refresh\JwtRefreshTokenInterface;
 use Drupal\user\UserInterface;
 
 /**
+ * JwtRefreshToken class.
+ *
  * @ContentEntityType(
  *   id = "jwt_refresh_token",
  *   label = @Translation("JWT Refresh Token"),
@@ -25,7 +25,7 @@ use Drupal\user\UserInterface;
 class JwtRefreshToken extends ContentEntityBase implements JwtRefreshTokenInterface {
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function isExpired() {
     return $this->get('expires')->getString() < REQUEST_TIME;
@@ -39,7 +39,7 @@ class JwtRefreshToken extends ContentEntityBase implements JwtRefreshTokenInterf
   const TTL = 60 * 60 * 24 * 7;
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
@@ -61,6 +61,7 @@ class JwtRefreshToken extends ContentEntityBase implements JwtRefreshTokenInterf
    * Generate default value for the expires time.
    *
    * @return string[]
+   *   Array containing the expiration time.
    */
   public static function expires() {
     return [REQUEST_TIME + self::TTL];

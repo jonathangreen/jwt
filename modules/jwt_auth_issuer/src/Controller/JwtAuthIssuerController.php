@@ -50,7 +50,8 @@ class JwtAuthIssuerController extends ControllerBase {
   /**
    * Generate.
    *
-   * @return \Symfony\Component\HttpFoundation\JsonResponse JSON response with token.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON response with token.
    */
   public function tokenResponse() {
     $response = new \stdClass();

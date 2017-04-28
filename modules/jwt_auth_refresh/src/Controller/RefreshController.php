@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
+/**
+ * Controller for the Refresh module.
+ */
 class RefreshController extends JwtAuthIssuerController {
 
   /**
@@ -47,7 +50,7 @@ class RefreshController extends JwtAuthIssuerController {
   protected $currentRequest;
 
   /**
-   * @inheritDoc
+   * Constructor.
    */
   public function __construct(JwtAuth $auth, JwtRefreshTokensInterface $refreshTokens, AccountSwitcherInterface $accountSwitcher, FloodInterface $flood, JwtTranscoderInterface $jwtTranscoder, RequestStack $requestStack) {
     parent::__construct($auth, $refreshTokens);
@@ -58,7 +61,7 @@ class RefreshController extends JwtAuthIssuerController {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static(
@@ -87,7 +90,10 @@ class RefreshController extends JwtAuthIssuerController {
    * Refresh controller.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   Response for the client.
    */
   public function refresh(Request $request) {
     $owner = $this->getToken($request)->getOwner();
@@ -102,7 +108,10 @@ class RefreshController extends JwtAuthIssuerController {
    * Retrieve the refresh token from the request.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   *
    * @return \Drupal\jwt_auth_refresh\JwtRefreshTokenInterface|null
+   *   The refreshed token interface.
    */
   protected function getToken(Request $request) {
     $json = json_decode($request->getContent());
@@ -124,11 +133,11 @@ class RefreshController extends JwtAuthIssuerController {
   /**
    * Access checker.
    *
-   * @param \Symfony\Component\HttpFoundation\Request $request
    * @return \Drupal\Core\Access\AccessResultInterface
+   *   The results for the access check.
    */
   public function access() {
-    // We can't type-hint $request
+    // We can't type-hint $request.
     // @see https://www.drupal.org/node/2786941
     $result = AccessResult::allowed();
     try {

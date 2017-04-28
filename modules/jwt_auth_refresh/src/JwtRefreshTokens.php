@@ -8,10 +8,13 @@ use Drupal\jwt\JsonWebToken\JsonWebToken;
 use Drupal\jwt\Transcoder\JwtTranscoderInterface;
 use Drupal\jwt_auth_refresh\Entity\JwtRefreshToken;
 
+/**
+ * JwtRefreshTokens class.
+ */
 class JwtRefreshTokens implements JwtRefreshTokensInterface {
 
   /**
-   * Entity Type manager
+   * Entity Type manager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
@@ -25,7 +28,7 @@ class JwtRefreshTokens implements JwtRefreshTokensInterface {
   protected $transcoder;
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager, JwtTranscoderInterface $jwtTranscoder) {
     $this->entityTypeManager = $entityTypeManager;
